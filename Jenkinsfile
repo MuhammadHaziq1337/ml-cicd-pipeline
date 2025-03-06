@@ -15,13 +15,13 @@ pipeline {
         }
         
         stage('Push to Docker Hub') {
-            steps {
-                withCredentials([string(credentialsId: 'docker-hub-credentials', variable: 'DOCKER_HUB_PASSWORD')]) {
-                    bat 'docker login -u muhammadhaziq123 -p %DOCKER_HUB_PASSWORD%'
-                    bat 'docker push muhammadhaziq123/ml-cicd-pipeline:%BUILD_NUMBER%'
-                }
-            }
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+            bat 'docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%'
+            bat 'docker push muhammadhaziq123/ml-cicd-pipeline:%BUILD_NUMBER%'
         }
+    }
+}
         
         stage('Email Notification') {
             steps {
