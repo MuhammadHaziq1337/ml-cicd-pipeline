@@ -10,15 +10,15 @@ pipeline {
         
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t muhammadhaziq123/ml-flask-app:${BUILD_NUMBER} .'
+                bat 'docker build -t muhammadhaziq123/ml-flask-app:${BUILD_NUMBER} .'
             }
         }
         
-        stage('Push to Docker Hub') {
+        stage('Pubat to Docker Hub') {
             steps {
                 withCredentials([string(credentialsId: 'docker-hub-credentials', variable: 'DOCKER_HUB_PASSWORD')]) {
-                    sh 'docker login -u muhammadhaziq123 -p ${DOCKER_HUB_PASSWORD}'
-                    sh 'docker push muhammadhaziq123/ml-flask-app:${BUILD_NUMBER}'
+                    bat 'docker login -u muhammadhaziq123 -p ${DOCKER_HUB_PASSWORD}'
+                    bat 'docker pubat muhammadhaziq123/ml-flask-app:${BUILD_NUMBER}'
                 }
             }
         }
