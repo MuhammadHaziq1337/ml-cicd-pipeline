@@ -34,7 +34,7 @@ pipeline {
                 emailext (
                     subject: "Pipeline: ${currentBuild.fullDisplayName} - Success",
                     body: "The deployment to production was successful. Docker image tag: ${BUILD_NUMBER}",
-                    to: 'i212692@nu.edu.pk'
+                    to: 'haziqijaz12345@gmail.com'
                 )
             }
         }
