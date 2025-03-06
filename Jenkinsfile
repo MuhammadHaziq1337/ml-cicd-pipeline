@@ -16,7 +16,7 @@ pipeline {
         
         stage('Push to Docker Hub') {
             steps {
-                withCredentials([string(credentialsId: 'docker-hub-password', variable: 'DOCKER_HUB_PASSWORD')]) {
+                withCredentials([string(credentialsId: 'docker-hub-credentials', variable: 'DOCKER_HUB_PASSWORD')]) {
                     bat 'docker login -u muhammadhaziq123 -p %DOCKER_HUB_PASSWORD%'
                     bat 'docker push muhammadhaziq123/ml-cicd-pipeline:%BUILD_NUMBER%'
                 }
