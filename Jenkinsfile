@@ -14,12 +14,10 @@ pipeline {
             }
         }
         
-        stage('Push to Docker Hub') {
+       stage('Push to Docker Hub') {
     steps {
-        withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-            bat 'docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%'
-            bat 'docker push muhammadhaziq123/ml-cicd-pipeline:%BUILD_NUMBER%'
-        }
+       
+        bat 'docker push muhammadhaziq123/ml-cicd-pipeline:%BUILD_NUMBER%'
     }
 }
         
