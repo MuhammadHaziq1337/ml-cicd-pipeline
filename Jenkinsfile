@@ -14,10 +14,18 @@ pipeline {
             }
         }
         
-       stage('Push to Docker Hub') {
+      stage('Push to Docker Hub') {
     steps {
-       
-        bat 'docker push muhammadhaziq123/ml-cicd-pipeline:%BUILD_NUMBER%'
+        // First log in to Docker Hub
+        withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+            // Create a temp file with the password to avoid command line issues
+            bat 'echo %DOCKER_PASSWORD%> temp.txt'
+            bat 'type temp.txt | docker login -u %DOCKER_USERNAME% --password-stdin'
+            bat 'del temp.txt'
+            
+            // Then push the image
+            bat 'docker push muhammadhaziq123/ml-cicd-pipeline:%BUILD_NUMBER%'
+        }
     }
 }
         
