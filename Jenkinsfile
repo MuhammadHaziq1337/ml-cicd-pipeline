@@ -45,7 +45,8 @@ pipeline {
                    """,
                    mimeType: 'text/html',
                    to: 'haziqijaz12345@gmail.com',
-                   replyTo: 'haziqijaz12345@gmail.com'
+                   from: 'jenkins@example.com',
+                replyTo: 'jenkins@example.com'
                )
            }
        }
